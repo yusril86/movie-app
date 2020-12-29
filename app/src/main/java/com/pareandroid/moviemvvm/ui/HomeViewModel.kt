@@ -10,19 +10,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class HomeViewModel(private val apiService : ApiEndPoint) : ViewModel() {
+class HomeViewModel() : ViewModel() {
     private val dataMovie = MutableLiveData<HomeResponse>()
 
     fun fetchDataMovie (){
-        /* val datasource = Config.apiServices
-         datasource.discoverMovie().enqueue(object : Callback<HomeResponse> {
-             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                 response.body()?.results ?: emptyList()
-             }
-
-             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-             }
-         })*/
 
         try {
             val datasource = Config.apiServices
@@ -39,22 +30,6 @@ class HomeViewModel(private val apiService : ApiEndPoint) : ViewModel() {
         }
 
 
-
-
-        /* val dataSource = Config.getRetrofit().create(ApiEndPoint::class.java)
-         dataSource.discoverMovie().enqueue(object : Callback<BaseResponse>{
-             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                 if (response.isSuccessful){
-                     dataMovie.postValue(response.body())
-                 }else{
-                     dataMovie.postValue(null)
-                 }
-             }
-
-             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                 dataMovie.postValue(null)
-             }
-         })*/
     }
 
     fun getDataMovie() : MutableLiveData<HomeResponse>{
