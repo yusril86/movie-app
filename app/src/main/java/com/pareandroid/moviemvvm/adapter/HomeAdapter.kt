@@ -1,17 +1,22 @@
 package com.pareandroid.moviemvvm.adapter
 
+import android.media.Rating
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.pareandroid.moviemvvm.R
 import com.pareandroid.moviemvvm.data.model.Result
 import kotlinx.android.synthetic.main.item_movie.view.*
 
+
 class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var mListMovie : MutableList<Result> = ArrayList()
+    private val uriImage = "https://image.tmdb.org/t/p/w780/"
 
     /*fun setListData(data : ArrayList<MovieResponse>){
         *//*if(mListMovie == null){
@@ -58,7 +63,7 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         /*val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
         return ViewHolder(view)*/
         return ViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
 
         )
     }
@@ -70,6 +75,18 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             mListMovie[position].apply {
                 tv_judul.text = title
                 tv_description.text = overview
+
+                val newValue = voteAverage
+                rt_movie.numStars = 5
+                rt_movie.stepSize = 0.5F
+                rt_movie.rating = (newValue/2).toFloat()
+
+                Glide.with(holder.itemView.context)
+                    .load(uriImage + posterPath)
+                    .apply(RequestOptions()
+                        .placeholder(R.drawable.ic_launcher_background))
+                    .transform(RoundedCorners(16))
+                    .into(iv_movie)
             }
         }
 
@@ -80,7 +97,7 @@ class HomeAdapter() : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         return mListMovie.size
     }
 
-    inner class ViewHolder(itemView : View):RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
        /* fun bind(result: Result) {
             with(itemView) {
                 tv_judul.text = result.title

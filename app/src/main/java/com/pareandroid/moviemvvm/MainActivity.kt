@@ -29,9 +29,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMovie(){
+        // fetchDataMovie to get Data from server with retrofit
+        //getDataMovie is Livedata and observe to show the Livedata in UI
         viewModel.fetchDataMovie()
         viewModel.getDataMovie().observe(this, {
-            it.let { data ->
+            //it adalah sebuah receiver untuk menampung value dari response
+            // also adalah sebuah scope funtion untuk melempar value(response) aslinya
+            // let adaalah sebuah scope function untuk melempar value untuk proses selanjutyna
+            it.also { data ->
                 data.apply {
                     adapterHome.updateAdapter(it.results)
                     adapterHome.notifyDataSetChanged()
