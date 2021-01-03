@@ -5,13 +5,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.pareandroid.moviemvvm.adapter.HomeAdapter
-import com.pareandroid.moviemvvm.data.model.HomeResponse
-import com.pareandroid.moviemvvm.ui.HomeViewModel
+import com.pareandroid.moviemvvm.ui.home.HomeViewModel
 import com.pareandroid.moviemvvm.ui.HomeViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-         lateinit var viewModel:HomeViewModel
+    lateinit var viewModel: HomeViewModel
     private var adapterHome: HomeAdapter = HomeAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-        private fun setUpViewModel(){
+    private fun setUpViewModel(){
         this.let {
             viewModel = ViewModelProvider(it, HomeViewModelFactory()
             ).get(HomeViewModel::class.java)

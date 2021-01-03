@@ -1,4 +1,4 @@
-package com.pareandroid.moviemvvm.ui
+package com.pareandroid.moviemvvm.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
